@@ -1,0 +1,9 @@
+Django==3.x  # Replace 3.x with the latest stable version of Django
+Flask==1.1.2    # Replace 1.1.2 with the latest stable version of Flask
+Django-REST-Framework==3.7.4  # Replace 3.7.4 with the latest stable version of Django REST Framework
+PyJWT==2.6.0     # Replace 2.6.0 with the latest stable version of PyJWT
+FastAPI==0.85.1   # Replace 0.85.1 with the latest stable version of FastAPI
+sqlalchemy==1.4.x   # Replace 1.4.x with the latest stable version of SQLAlchemy
+gunicorn==20.1.0  # Replace 20.1.0 with the latest stable version of Gunicorn
+Django-CORS-Middleware==3.7.2  # Replace 3.7.2 with the latest stable version of Django CORS Middleware
+pip install Pillow
