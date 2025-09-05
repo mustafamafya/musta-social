@@ -1,12 +1,21 @@
 from rest_framework import serializers
-from .models import user_profile, userPost, comment
+from .models import user_profile, userPost, comment , Follow 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    followers_count = serializers.SerializerMethodField()
+    following_count = serializers.SerializerMethodField()
+
     class Meta:
         model = user_profile
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'gender', 'age', 'address', 'profile_img']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'gender', 'age', 'address', 'profile_img', 'followers_count', 'following_count']
+
+    def get_followers_count(self, obj):
+        return obj.followers.count()
+
+    def get_following_count(self, obj):
+        return obj.following.count()
 
 class CommentSerializer(serializers.ModelSerializer):
     user = UserProfileSerializer(read_only=True)
@@ -18,6 +27,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class UserPostSerializer(serializers.ModelSerializer):
     author = UserProfileSerializer(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
+    image = serializers.ImageField(required=False)
 
     class Meta:
         model = userPost
@@ -71,7 +81,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     image = serializers.ImageField(required=False)
-    total_likes = serializers.IntegerField()
+    total_likes = serializers.IntegerField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
@@ -80,3 +90,9 @@ class PostSerializer(serializers.ModelSerializer):
             'id', 'author', 'subject', 'content', 'image',
             'created_at', 'updated_at', 'total_likes', 'comments'
         ]
+        
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = ['id', 'follower', 'following', 'created_at']
+        read_only_fields = ['follower']

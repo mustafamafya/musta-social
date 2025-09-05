@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Navbar from './navbar';
 import Home from './home';
-// import Friends from '../components/Friends';
+import Friends from './friends';
 import Profile from './profile';
 import Settings from './settings';
 

@@ -7,6 +7,7 @@ import NotFound from './components/NotFound'; // fallback route
 
 
 function App() {
+  
   return (
     <Router>
       <Routes>
