@@ -72,55 +72,64 @@ export default function Friends() {
   );
 
   // 👤 Render selected profile
-  const renderProfile = user => (
-    <div className="bg-white p-8 rounded-xl shadow-md border border-gray-200 max-w-xl mx-auto">
-      <h2 className="text-4xl font-bold text-purple-700 mb-4 text-center">{user.username}</h2>
+const renderProfile = user => (
+  <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-200 max-w-md mx-auto text-center space-y-6">
+    
+    {/* Profile Image */}
+    <div className="flex justify-center">
+      <img
+        src={`http://localhost:8000${user.profile_img || '/media/profile_img/default.jpg'}`}
 
-      <div className="text-center mb-6">
-        <p className="text-gray-600">📧 {user.email}</p>
-        <p className="text-gray-600">
-          🗓️ Joined: {user.date_joined ? new Date(user.date_joined).toLocaleDateString() : 'Unknown'}
-        </p>
+        alt={`${user.username}'s profile`}
+        className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-purple-500 shadow-md"
+      />
+    </div>
+
+    {/* Username */}
+    <h2 className="text-3xl sm:text-4xl font-bold text-purple-700">{user.username}</h2>
+
+    {/* Email */}
+    <p className="text-gray-600 text-sm sm:text-base">📧 {user.email}</p>
+
+    {/* Follower Stats */}
+    <div className="flex justify-center gap-8 pt-2">
+      <div>
+        <p className="text-xl font-semibold text-purple-600">{user.followers_count || 0}</p>
+        <p className="text-xs text-gray-500">Followers</p>
       </div>
-
-      <div className="flex justify-center gap-6 mb-6">
-        <div className="text-center">
-          <p className="text-lg font-semibold text-purple-600">{user.followers_count || 0}</p>
-          <p className="text-sm text-gray-500">Followers</p>
-        </div>
-        <div className="text-center">
-          <p className="text-lg font-semibold text-purple-600">{user.following_count || 0}</p>
-          <p className="text-sm text-gray-500">Following</p>
-        </div>
-      </div>
-
-      <div className="text-center">
-        {following.includes(user.username) ? (
-          <button
-            onClick={() => handleUnfollow(user.username)}
-            className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
-          >
-            Unfollow
-          </button>
-        ) : (
-          <button
-            onClick={() => handleFollow(user.username)}
-            className="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700"
-          >
-            Follow
-          </button>
-        )}
-
-        <button
-          onClick={() => setSelectedUser(null)}
-          className="ml-4 text-sm text-gray-500 hover:underline"
-        >
-          ← Back to list
-        </button>
+      <div>
+        <p className="text-xl font-semibold text-purple-600">{user.following_count || 0}</p>
+        <p className="text-xs text-gray-500">Following</p>
       </div>
     </div>
-  );
 
+    {/* Action Buttons */}
+    <div className="flex justify-center gap-4 pt-4">
+      {following.includes(user.username) ? (
+        <button
+          onClick={() => handleUnfollow(user.username)}
+          className="bg-red-500 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition"
+        >
+          Unfollow
+        </button>
+      ) : (
+        <button
+          onClick={() => handleFollow(user.username)}
+          className="bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition"
+        >
+          Follow
+        </button>
+      )}
+
+      <button
+        onClick={() => setSelectedUser(null)}
+        className="text-sm text-gray-500 hover:underline self-center"
+      >
+        ← Back to list
+      </button>
+    </div>
+  </div>
+);
   // 🔍 Filter users by search term
   const filteredUsers = users.filter(user =>
     user.username.toLowerCase().includes(searchTerm.toLowerCase())
