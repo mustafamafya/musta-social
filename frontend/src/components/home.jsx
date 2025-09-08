@@ -321,10 +321,23 @@ const handleSubmit = async e => {
       
       <div className="w-full max-w-md space-y-6">
         {posts.map(post => (
+            console.log(post),
           <div
             key={post.id}
             className="bg-white border border-gray-200 rounded-xl shadow-md p-6 hover:shadow-lg transition"
           >
+            <div className="flex items-center gap-3 mb-4">
+                <img
+                  src={post.author.profile_img}
+                  alt={`${post.author.first_name} ${post.author.last_name}`}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-purple-500 shadow-sm"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-purple-700">
+                    {post.author.first_name} {post.author.last_name}
+                  </p>
+                </div>
+              </div>
             <h3 className="text-xl font-semibold text-purple-800 mb-2">
               {post.subject}
             </h3>

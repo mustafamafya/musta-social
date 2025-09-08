@@ -14,7 +14,7 @@ class user_profile(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True)
     email=models.EmailField()
     address =models.CharField(null=True, blank=True)
-    profile_img=models.ImageField(upload_to='profile_img/%Y/%m/%d/', blank=True, null=True)
+    profile_img=models.ImageField(upload_to='profile_img/%Y/%m/%d/',blank=True,null=True,default='profile_img/profilepic.png')
     def __str__(self):
         return self.username
     

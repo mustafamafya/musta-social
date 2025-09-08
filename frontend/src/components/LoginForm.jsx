@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/auth.js';
-
+import { Link } from 'react-router-dom';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -53,6 +53,13 @@ const LoginForm = () => {
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md w-full">
           Login
         </button>
+       {/* to navigate between login and registeration page */}
+        <div className="mt-4 text-center text-sm text-gray-600">
+          Don’t have an account?{' '}
+          <Link to="/register" className="text-blue-500 hover:underline">
+            Create one here
+          </Link>
+        </div>
       </form>
     </div>
   );

@@ -28,10 +28,12 @@ class UserPostSerializer(serializers.ModelSerializer):
     author = UserProfileSerializer(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     image = serializers.ImageField(required=False)
+    total_likes = serializers.IntegerField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = userPost
-        fields = ['id', 'author', 'subject', 'content', 'image', 'created_at', 'updated_at', 'likes', 'comments']
+        fields = ['id', 'author', 'subject', 'content', 'image', 'created_at', 'updated_at', 'likes','total_likes','comments']
 
 # handels registrations and loging throuht api
 

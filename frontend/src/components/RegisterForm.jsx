@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { registerUser } from '../services/auth.js';
-
+import { Link } from 'react-router-dom';
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     first_name: '',
@@ -100,6 +100,13 @@ const RegisterForm = () => {
         <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md w-full hover:bg-blue-700 transition">
           Register
         </button>
+        {/* to navigate between login and registeration page */}
+        <div className="mt-4 text-center text-sm text-gray-600">
+          Already have an account?{' '}
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Login here
+          </Link>
+        </div>
       </form>
     </div>
   );
